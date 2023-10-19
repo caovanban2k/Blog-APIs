@@ -59,9 +59,10 @@ public class PostServiceImp implements PostService{
         Post post = postRepository.findById(id).orElseThrow(
                 ()  ->  new ResourceNotFoundException("Post", "id" , id)
         );
-
-       Category category = categoryRepository.findById(postDTO.getCategoryId())
+        //get post by id from database
+        Category category = categoryRepository.findById(postDTO.getCategoryId())
                        .orElseThrow(() -> new ResourceNotFoundException("Category", "id", postDTO.getCategoryId()));
+
 
         post.setTitle(post.getTitle());
         post.setDescription(postDTO.getDescription());
@@ -77,7 +78,7 @@ public class PostServiceImp implements PostService{
         Post post = postRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Post",  "id", id)
         );
-        postRepository.delete(post);
+        postRepository.deleteById(id);
     }
 
     @Override

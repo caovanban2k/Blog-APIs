@@ -45,17 +45,18 @@ public class PostController {
         return new ResponseEntity<>(postService.getPostById(id), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRoles('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<?> updatePost(@Valid @RequestBody PostDTO  postDTO, @PathVariable("id") Long id){
         return new ResponseEntity<>(postService.updatePost(postDTO, id), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePost(@PathVariable("id") Long id){
        postService.deletePost(id);
 
-       return new ResponseEntity<>("Post entity deleted succesfully.", HttpStatus.OK);
+       return new ResponseEntity<>("Post entity deleted successfully!.", HttpStatus.OK);
     }
 
     @GetMapping("/category/{id}")
